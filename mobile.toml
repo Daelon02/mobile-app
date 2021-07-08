@@ -1,0 +1,5 @@
+[app]
+name = "mobile-app"
+stylized-name = "Mobile App"
+domain = "github.com"
+template-pack = "bevy"
