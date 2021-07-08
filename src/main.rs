@@ -1,4 +1,4 @@
-use substrate_api_client::{Api, node_metadata};
+use substrate_api_client::{Api, node_metadata, AccountInfo};
 use substrate_api_client::sp_runtime::app_crypto::sp_core::sr25519;
 
 fn main() {
@@ -10,4 +10,13 @@ fn main() {
 
     let meta = Api::get_metadata(&api).unwrap();
     println!("Metadata:\n {}", node_metadata::Metadata::pretty_format(&meta).unwrap());
+
+    // let account = AccountKeyring::Alice.public();
+    // let result: AccountInfo = api
+    //     .get_storage_map("System", "Account", account, None)
+    //     .unwrap()
+    //     .or_else(|| Some(AccountInfo::default))
+    //     .unwrap();
+    //
+    // println!("[+] AccountInfo for Alice is {:?}", result);
 }
