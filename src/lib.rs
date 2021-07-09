@@ -5,7 +5,7 @@ use mobile_entry_point::mobile_entry_point;
 fn main() {
     App::build()
         .add_resource(WindowDescriptor {
-            title: "Mobile App".to_string(),
+            title: "Realis Explorer".to_string(),
             ..Default::default()
         })
         .add_plugins(DefaultPlugins)

@@ -1,13 +1,8 @@
-#[macro_use]
-extern crate clap;
-
-use clap::App;
-
 use sp_core::sr25519;
-
-use node_template_runtime::{Block, Header, SignedBlock};
+use serde_json::*;
 use std::sync::mpsc::channel;
 use substrate_api_client::Api;
+use sp_runtime::*;
 
 fn main() {
     env_logger::init();
@@ -19,32 +14,4 @@ fn main() {
     let head = api.get_finalized_head().unwrap().unwrap();
 
     println!("Finalized Head:\n {} \n", head);
-
-    let h: Header = api.get_header(Some(head)).unwrap().unwrap();
-    println!("Finalized header:\n {:?} \n", h);
-
-    let b: SignedBlock = api.get_signed_block(Some(head)).unwrap().unwrap();
-    println!("Finalized signed block:\n {:?} \n", b);
-
-    println!(
-        "Latest Header: \n {:?} \n",
-        api.get_header::<Header>(None).unwrap()
-    );
-
-    println!(
-        "Latest block: \n {:?} \n",
-        api.get_block::<Block>(None).unwrap()
-    );
-
-    println!("Subscribing to finalized heads");
-    let (sender, receiver) = channel();
-    api.subscribe_finalized_heads(sender).unwrap();
-
-    for _ in 0..5 {
-        let head: Header = receiver
-            .recv()
-            .map(|header| serde_json::from_str(&header).unwrap())
-            .unwrap();
-        println!("Got new Block {:?}", head);
-    }
 }
