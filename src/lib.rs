@@ -26,3 +26,7 @@ fn setup(
             ..Default::default()
         });
 }
+fn test_string() -> String {
+    let amogus = "AMOGUS";
+    amogus.to_string()
+}
